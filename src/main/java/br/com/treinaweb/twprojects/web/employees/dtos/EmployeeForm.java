@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import br.com.treinaweb.twprojects.core.validations.Age;
+import br.com.treinaweb.twprojects.core.validations.ResignationDateGreatherThanHireDate;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ResignationDateGreatherThanHireDate
 public class EmployeeForm {
 
     @NotEmpty
