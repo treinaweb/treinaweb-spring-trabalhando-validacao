@@ -1,5 +1,6 @@
 package br.com.treinaweb.twprojects.web.clients.dtos;
 
+import br.com.treinaweb.twprojects.core.validators.ClientEmailUnique;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -23,6 +24,7 @@ public class ClientForm {
     @Email
     @NotBlank
     @Size(max = 255)
+    @ClientEmailUnique
     private String email;
 
     @NotEmpty

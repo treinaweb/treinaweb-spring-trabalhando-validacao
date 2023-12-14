@@ -3,6 +3,7 @@ package br.com.treinaweb.twprojects.web.clients.controllers;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,8 +46,9 @@ public class ClientController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid ClientForm clientForm, BindingResult result) {
+    public String create(@Valid ClientForm clientForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("pageTitle", "Cadastro de Cliente");
             return "clients/form";
         }
         var client = clientMapper.toClient(clientForm);
@@ -67,8 +69,9 @@ public class ClientController {
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@PathVariable Long id, @Valid ClientForm clientForm, BindingResult result) {
+    public String edit(@PathVariable Long id, @Valid ClientForm clientForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("pageTitle", "Edição de Cliente");
             return "clients/form";
         }
         if (!clientRepository.existsById(id)) {
