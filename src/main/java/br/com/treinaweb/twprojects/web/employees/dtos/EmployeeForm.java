@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import br.com.treinaweb.twprojects.core.validations.Age;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -47,6 +48,7 @@ public class EmployeeForm {
 
     @Past
     @NotNull
+    @Age(min = 18, max = 100)
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate birthDate;
 
