@@ -16,11 +16,25 @@
             <div class="form-group">
               <label for="name">Nome*</label>
               <input type="text" th:field="*{name}" required class="form-control">
+              <ul>
+                <li 
+                  class="text-danger" 
+                  th:each="error : ${#fields.errors('name')}" 
+                  th:text="${error}">
+                </li>
+              </ul>
             </div>
             
             <div class="form-group">
               <label for="email">E-mail*</label>
               <input type="email" th:field="*{email}" required class="form-control">
+              <ul>
+                <li 
+                  class="text-danger" 
+                  th:each="error : ${#fields.errors('email')}" 
+                  th:text="${error}">
+                </li>
+              </ul>
             </div>
             
             <div class="form-group">
@@ -33,6 +47,13 @@
                 pattern="^\(\d{2}\) \d{5}-\d{4}$"
                 class="form-control"
               >
+              <ul>
+                <li 
+                  class="text-danger" 
+                  th:each="error : ${#fields.errors('phone')}" 
+                  th:text="${error}">
+                </li>
+              </ul>
             </div>
       
             <button class="btn btn-primary" type="submit">Salvar</button>

@@ -3,6 +3,7 @@ package br.com.treinaweb.twprojects.web.clients.controllers;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import br.com.treinaweb.twprojects.core.exceptions.ClientNotFoundException;
 import br.com.treinaweb.twprojects.core.repositories.ClientRepository;
 import br.com.treinaweb.twprojects.web.clients.dtos.ClientForm;
 import br.com.treinaweb.twprojects.web.clients.mappers.ClientMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -43,7 +45,10 @@ public class ClientController {
     }
 
     @PostMapping("/create")
-    public String create(ClientForm clientForm) {
+    public String create(@Valid ClientForm clientForm, BindingResult result) {
+        if (result.hasErrors()) {
+            return "clients/form";
+        }
         var client = clientMapper.toClient(clientForm);
         clientRepository.save(client);
         return "redirect:/clients";
@@ -62,7 +67,10 @@ public class ClientController {
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@PathVariable Long id, ClientForm clientForm) {
+    public String edit(@PathVariable Long id, @Valid ClientForm clientForm, BindingResult result) {
+        if (result.hasErrors()) {
+            return "clients/form";
+        }
         if (!clientRepository.existsById(id)) {
             throw new ClientNotFoundException();
         }
