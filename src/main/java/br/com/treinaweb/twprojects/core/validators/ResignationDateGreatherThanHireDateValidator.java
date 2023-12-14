@@ -1,4 +1,4 @@
-package br.com.treinaweb.twprojects.core.validations;
+package br.com.treinaweb.twprojects.core.validators;
 
 import br.com.treinaweb.twprojects.web.employees.dtos.EmployeeForm;
 import jakarta.validation.ConstraintValidator;

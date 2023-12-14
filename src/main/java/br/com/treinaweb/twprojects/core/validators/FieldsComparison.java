@@ -1,4 +1,4 @@
-package br.com.treinaweb.twprojects.core.validations;
+package br.com.treinaweb.twprojects.core.validators;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,13 +10,21 @@ import jakarta.validation.Payload;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ResignationDateGreatherThanHireDateValidator.class)
-public @interface ResignationDateGreatherThanHireDate {
+@Constraint(validatedBy = FieldsComparisonValidator.class)
+public @interface FieldsComparison {
 
-    String message() default "a data de demissão deve ser posterior a data de contratação";
+    String message();
 
 	Class<?>[] groups() default { };
 
 	Class<? extends Payload>[] payload() default { };
+
+    String field();
+
+    String fieldToCompare();
+
+    String fieldError() default "global";
+
+    Comparison comparison();
     
 }

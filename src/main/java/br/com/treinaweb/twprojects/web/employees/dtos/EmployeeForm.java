@@ -6,8 +6,9 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import br.com.treinaweb.twprojects.core.validations.Age;
-import br.com.treinaweb.twprojects.core.validations.ResignationDateGreatherThanHireDate;
+import br.com.treinaweb.twprojects.core.validators.Age;
+import br.com.treinaweb.twprojects.core.validators.Comparison;
+import br.com.treinaweb.twprojects.core.validators.FieldsComparison;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -26,7 +27,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ResignationDateGreatherThanHireDate
+@FieldsComparison(
+    field = "hireDate",
+    fieldToCompare = "resignationDate",
+    comparison = Comparison.LESS_THAN,
+    message = "a data de demissão deve ser maior que a data de contratação",
+    fieldError = "resignationDate"
+)
 public class EmployeeForm {
 
     @NotEmpty

@@ -1,4 +1,4 @@
-package br.com.treinaweb.twprojects.core.validations;
+package br.com.treinaweb.twprojects.core.validators;
 
 import java.time.LocalDate;
 

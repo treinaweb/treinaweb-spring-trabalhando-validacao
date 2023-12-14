@@ -1,4 +1,4 @@
-package br.com.treinaweb.twprojects.core.validations;
+package br.com.treinaweb.twprojects.core.validators;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,19 +8,15 @@ import java.lang.annotation.Target;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = AgeValidator.class)
-public @interface Age {
+@Constraint(validatedBy = ResignationDateGreatherThanHireDateValidator.class)
+public @interface ResignationDateGreatherThanHireDate {
 
-    String message() default "a idade deve estar entre {min} e {max}";
+    String message() default "a data de demissão deve ser posterior a data de contratação";
 
 	Class<?>[] groups() default { };
 
 	Class<? extends Payload>[] payload() default { };
-
-    int min() default 0;
-
-	int max() default Integer.MAX_VALUE;
     
 }
